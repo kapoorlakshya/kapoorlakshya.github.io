@@ -99,7 +99,7 @@ expect(@browser.h2(text: 'News).present?).to be(true)
 There a few caveats when using this mode. Read more about this
 on the GitHub page.
 
-### Planned features yet to be added:
+### Planned features:
 
 ###### Transcode recorded videos
 

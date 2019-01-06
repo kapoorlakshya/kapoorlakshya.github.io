@@ -57,7 +57,7 @@ Pro and finalize the code :)
 
 ###### Record your desktop
 
-```
+```ruby
 opts      = { input:     'desktop',
               output:    '../recordings/screenrecorder-desktop.mp4',
               framerate: 15 }
@@ -73,7 +73,7 @@ opts      = { input:     'desktop',
 
 ###### Record a specific window
 
-```
+```ruby
 require 'watir'
 
 browser = Watir::Browser.new :firefox

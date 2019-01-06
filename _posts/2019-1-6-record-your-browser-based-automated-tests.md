@@ -1,3 +1,8 @@
+---
+layout: post
+title: Record your browser based automated tests
+---
+
 # Record your browser based automated tests
 
 If you are an automated tester who does browser based testing

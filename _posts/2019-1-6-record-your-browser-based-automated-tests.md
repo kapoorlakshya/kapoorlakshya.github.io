@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Recording your browser based automated tests
+title: Record videos of your browser based (Selenium) automated tests
 ---
 
 My latest project is a Ruby gem that allows you to record your desktop
-or a specific application window, primarily geared towards GUI based
+or a specific application window, primarily geared towards browser based
 automated tests.
 <!--more-->
 

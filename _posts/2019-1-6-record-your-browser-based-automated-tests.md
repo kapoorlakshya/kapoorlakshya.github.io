@@ -12,10 +12,16 @@ If you have used [SauceLabs](https://saucelabs.com) or
 [BrowserStack](https://www.browserstack.com/) before, you may be
 familiar with their video recording feature. In addition to providing
 screenshots and a log, this feature records the test execution and
-could be a pain-killer while debugging those UI tests failures.
-However, if you are not using these services and are interested
-in recording your test executions, check out the [ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder)
-Ruby gem.
+could be a painkiller while debugging those UI tests failures.
+You are able to see the test execution in action and see what
+happened before, during, and after the test failure or an application
+stack trace. This makes debugging and documenting test cases or application
+bugs less painful than it can be.
+
+However, if you are not using a service like SauceLabs or BrowserStack
+and are interested in recording your test executions,
+check out the [ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder)
+Ruby gem that I am developing.
 
 ## Capabilities
 

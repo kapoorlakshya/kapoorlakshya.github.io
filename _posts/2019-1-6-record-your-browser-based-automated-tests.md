@@ -79,6 +79,23 @@ expect(@browser.h2(text: 'News).present?).to be(true)
 There a few caveats when using this mode. Read more about this
 on the [GitHub page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder).
 
+<b>Advanced Usage</b>
+
+You can further configured FFmpeg through the `:advanced` key in
+your `opts` Hash.
+
+{% highlight ruby %}
+opts = { input:     'desktop',
+         output:    'recorder-test.mp4',
+         framerate: 30,
+         log:       'recorder.log',
+         log_level: Logger::DEBUG, # For gem
+         advanced: { loglevel: 'level+debug', # For FFmpeg
+                     video_size:  '640x480',
+                     show_region: '1' }
+}
+{% endhighlight %}
+
 ## Planned features
 
 <b>Transcode recorded videos</b>

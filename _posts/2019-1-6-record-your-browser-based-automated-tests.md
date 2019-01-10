@@ -41,6 +41,7 @@ opts      = { input:     'desktop',
 
 # Run your test
 
+# Stops FFmpeg and writes video file
 @recorder.stop #=> #<FFMPEG::Movie...>
 
 # Video ready at given output path.
@@ -60,7 +61,6 @@ opts      = { input:     FFMPEG::RecordingRegions.fetch('firefox').first,
               output:    'screenrecorder-firefox.mp4',
               framerate: 15 }
 @recorder = FFMPEG::ScreenRecorder.new(opts)
-
 @recorder.start
 
 # Run tests
@@ -70,9 +70,7 @@ browser.link(text: 'News').wait_until_present.click
 # Using rspec-expectations gem
 expect(@browser.h2(text: 'News).present?).to be(true)
 
-# Stop recording
 @recorder.stop
-
 @browser.quit
 {% endhighlight %}
 

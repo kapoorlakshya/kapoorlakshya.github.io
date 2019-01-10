@@ -15,7 +15,7 @@ screenshots and a log, this feature records the test execution and
 could be a pain-killer while debugging those UI tests failures.
 However, if you are not using these services and are interested
 in recording your test executions, check out the [ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder)
-gem.
+Ruby gem.
 
 ## Capabilities
 
@@ -71,7 +71,7 @@ expect(@browser.h2(text: 'News).present?).to be(true)
 {% endhighlight %}
 
 There a few caveats when using this mode. Read more about this
-on the GitHub page.
+on the [GitHub page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder).
 
 ## Planned features
 

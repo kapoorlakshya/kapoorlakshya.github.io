@@ -4,35 +4,33 @@ title: Record videos of your browser based (Selenium) automated tests
 ---
 
 My latest project is a Ruby gem that allows you to record your desktop
-or a specific application window, primarily geared towards browser based
-automated tests.
+or a specific application window, primarily geared towards browser
+(or any GUI) based automated tests.
 <!--more-->
 
-If you have used [SauceLabs](https://saucelabs.com) or
-[BrowserStack](https://www.browserstack.com/) before, you may be
-familiar with their video recording feature. In addition to providing
-screenshots and a log, this feature records the test execution and
-could be a painkiller while debugging those UI tests failures.
-You are able to see the test execution in action and see what
-happened before, during, and after the test failure or an application
-stack trace. This makes debugging and documenting test cases or application
-bugs less painful than it can be.
+If you are familiar with [SauceLabs](https://saucelabs.com) or
+[BrowserStack](https://www.browserstack.com/), you may be
+aware of their video recording feature. In
+addition to providing screenshots and a log, these services provide a
+feature to record the test execution which could be a painkiller while
+debugging those UI tests failures. You are able to see the test execution
+in action and see what happened before, during, and after the test failure
+or an application stack trace. This makes debugging and documenting test
+cases or application bugs (edge cases anyone?) less painful than they can be.
 
-However, if you are not using a service like SauceLabs or BrowserStack
-and are interested in recording your test executions,
-check out the [ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder)
-Ruby gem that I am developing.
+However, if you are not using these services and are interested in
+recording your test executions, check out the
+[ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder)
+gem.
 
 ## Capabilities
 
-<b>Supports Windows, Linux, and macOS</b>
-
-macOS support coming soon. Need to dust off my wife's 2010 MacBook
-Pro and finalize the code :)
-
 <b>Record your desktop</b>
 
-{% highlight ruby %}
+This mode records the whole screen and is best suited if your tests launch
+multiple windows or if they resize the browser/GUI during the execution.
+
+```ruby
 opts      = { input:     'desktop',
               output:    'screenrecorder-desktop.mp4',
               framerate: 15 }
@@ -45,11 +43,16 @@ opts      = { input:     'desktop',
 @recorder.stop #=> #<FFMPEG::Movie...>
 
 # Video ready at given output path.
-{% endhighlight %}
+```
 
 <b>Record a specific window</b>
 
-{% highlight ruby %}
+This mode records a specific application window with the given
+window title. This keeps the focus limited your application and
+keeps the recording size relatively smaller than the desktop mode,
+unless of course you maximize the window and record fullscreen.
+
+```ruby
 require 'watir'
 
 browser = Watir::Browser.new :firefox
@@ -72,7 +75,7 @@ expect(@browser.h2(text: 'News).present?).to be(true)
 
 @recorder.stop
 @browser.quit
-{% endhighlight %}
+```
 
 There a few caveats when using this mode. Read more about this
 on the [GitHub page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder).
@@ -82,7 +85,7 @@ on the [GitHub page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder).
 You can further configured FFmpeg through the `:advanced` key in
 your `opts` Hash.
 
-{% highlight ruby %}
+```ruby
 opts = { input:     'desktop',
          output:    'recorder-test.mp4',
          framerate: 30,
@@ -92,7 +95,12 @@ opts = { input:     'desktop',
                      video_size:  '640x480',
                      show_region: '1' }
 }
-{% endhighlight %}
+```
+
+<b>Supports Windows, Linux, and macOS</b>
+
+macOS support coming soon. Need to dust off my wife's 2010 MacBook
+Pro and finalize the code :)
 
 ## Planned features
 
@@ -103,6 +111,10 @@ Transcode video to GIF, MKV, or whatever your reporting tool supports.
 <b>Record audio</b>
 
 Use DirectShow to record system audio.
+
+<b>Discard recording</b>
+
+If your test execution passes, you can easily discard the recording.
 
 <b>Live stream</b>
 

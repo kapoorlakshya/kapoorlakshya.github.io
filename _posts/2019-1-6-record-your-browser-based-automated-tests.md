@@ -82,7 +82,7 @@ on the [GitHub page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder).
 
 <b>Advanced Usage</b>
 
-You can further configured FFmpeg through the `:advanced` key in
+You can further configure FFmpeg through the `:advanced` key in
 your `opts` Hash.
 
 ```ruby
@@ -110,11 +110,13 @@ Transcode video to GIF, MKV, or whatever your reporting tool supports.
 
 <b>Record audio</b>
 
-Use DirectShow to record system audio.
+Use DirectShow (Windows), ALSA (Linux) or avfoundation (macOS) to
+record system audio.
 
 <b>Discard recording</b>
 
-If your test execution passes, you can easily discard the recording.
+If your test execution passes, you can easily discard the recording
+through `@recorder.discard`.
 
 <b>Live stream</b>
 

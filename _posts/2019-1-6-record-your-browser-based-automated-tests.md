@@ -41,9 +41,12 @@ opts      = { input:     'desktop',
 
 # Stops FFmpeg and writes video file
 @recorder.stop #=> #<FFMPEG::Movie...>
-
-# Video ready at given output path.
 ```
+
+<div class="video-responsive">
+    <iframe src="https://player.vimeo.com/video/311132029" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+    </iframe>
+</div>
 
 <b>Record a specific window</b>
 
@@ -57,7 +60,7 @@ require 'watir'
 
 browser = Watir::Browser.new :firefox
 
-FFMPEG::RecordingRegions.fetch('firefox') # Name of exe
+# FFMPEG::RecordingRegions.fetch('firefox') # Provide name of exe
 #=> ["Mozilla Firefox"]
 
 opts      = { input:     FFMPEG::RecordingRegions.fetch('firefox').first,
@@ -76,6 +79,11 @@ expect(@browser.h2(text: 'News).present?).to be(true)
 @recorder.stop
 @browser.quit
 ```
+
+<div class="video-responsive">
+    <iframe src="https://player.vimeo.com/video/311132161" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+    </iframe>
+</div>
 
 There a few caveats when using this mode. Read more about this
 on the [GitHub page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder).

@@ -3,6 +3,10 @@ layout: post
 title: Record videos of your UI based automated tests
 date: 2019-1-20
 permalink: /introducing-ffmpeg-screenrecorder
+categories:
+    - ruby
+    - gems
+    - automated testing
 tags:
     - ruby record screen
     - test recorder

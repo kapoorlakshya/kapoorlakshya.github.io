@@ -1,18 +1,29 @@
 ---
 layout: post
-title: Record videos of your browser based (Selenium) automated tests
+title: Record videos of your browser or GUI based automated tests
+date: 2019-1-20
+tags:
+    - ruby record screen
+    - test recorder
+    - ffmpeg-screenrecorder
+    - selenium
+    - watir
+    - cucumber
+    - capybara
 ---
 
 My latest project is a Ruby gem that allows you to record your desktop
-or a specific application window, primarily geared towards browser
-(or any GUI) based automated tests.
-<!--more-->
+or a specific application window, primarily geared towards browser based
+automated tests using [Selenium](https://github.com/SeleniumHQ/selenium),
+ [Watir](https://github.com/watir/watir), or [Capybara](https://github.com/teamcapybara/capybara).
+ However, any Ruby based project should be able to use it.
+ <!--more-->
 
 If you are familiar with [SauceLabs](https://saucelabs.com) or
 [BrowserStack](https://www.browserstack.com/), you may be
 aware of their video recording feature. In
-addition to providing screenshots and a log, these services provide a
-feature to record the test execution which could be a painkiller while
+addition to providing screenshots and a log, these services provide an option
+ to record the test execution which could be a painkiller while
 debugging those UI tests failures. You are able to see the test execution
 in action and see what happened before, during, and after the test failure
 or an application stack trace. This makes debugging and documenting test
@@ -23,9 +34,8 @@ recording your test executions, check out the
 [ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder)
 gem.
 
-## Capabilities
 
-<b>Record your desktop</b>
+## Record your desktop
 
 This mode records the whole screen and is best suited if your tests launch
 multiple windows or if they resize the browser/GUI during the execution.
@@ -48,7 +58,7 @@ opts      = { input:     'desktop',
     </iframe>
 </div>
 
-<b>Record a specific window</b>
+## Record a specific window
 
 This mode records a specific application window with the given
 window title. This keeps the focus limited your application and
@@ -85,10 +95,12 @@ expect(@browser.h2(text: 'News).present?).to be(true)
     </iframe>
 </div>
 
-There a few caveats when using this mode. Read more about this
-on the [GitHub page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder).
+<b>Note</b>: This feature is not supported on Linux due to a limitation in
+`x11grab`. However, you can set the `x` and `y` coordinates along with
+the `video_size` to limit the recording region to the target window.
+See example [here](https://trac.ffmpeg.org/wiki/Capture/Desktop).
 
-<b>Advanced Usage</b>
+## Advanced Usage
 
 You can further configure FFmpeg through the `:advanced` key in
 your `opts` Hash.
@@ -105,7 +117,7 @@ opts = { input:     'desktop',
 }
 ```
 
-<b>Supports Windows, Linux, and macOS</b>
+## Supports Windows, Linux, and macOS
 
 macOS support coming soon. Need to dust off my wife's 2010 MacBook
 Pro and finalize the code :)
@@ -142,5 +154,5 @@ There is a [Cucumber](https://github.com/cucumber/cucumber) +
 
 This project is my attempt to give back to the open source
 community. It is still in the early stages of development, so please
-feel free to report any bugs or request a feature on the
+feel free to report any bugs or request a feature through the
 [Issues page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder/issues) on GitHub.

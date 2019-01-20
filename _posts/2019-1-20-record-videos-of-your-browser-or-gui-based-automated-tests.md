@@ -32,7 +32,7 @@ cases or application bugs (edge cases anyone?) less painful than they can be.
 However, if you are not using these services and are interested in
 recording your test executions, check out the
 [ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder)
-gem.
+gem. Here is a quick overview of the features:
 
 
 ## Record your desktop

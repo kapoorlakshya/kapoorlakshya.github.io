@@ -21,3 +21,6 @@
     him." />
 {% endif %}
 <meta name="author" content="{{ site.name }}" />
+{% if page.tags.size > 0 %}
+    <meta property="keywords" content="{{ page.tags | join: ', ' }}" />
+{% endif %}

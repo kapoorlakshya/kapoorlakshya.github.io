@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Record videos of your browser or GUI based automated tests
+title: Record videos of your UI based automated tests
 date: 2019-1-20
 tags:
     - ruby record screen

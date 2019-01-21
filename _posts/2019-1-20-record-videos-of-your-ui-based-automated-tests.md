@@ -17,27 +17,26 @@ tags:
     - capybara
 ---
 
-My latest project is a Ruby gem that allows you to record your desktop
-or a specific application window, primarily geared towards browser based
-automated tests using [Selenium](https://github.com/SeleniumHQ/selenium),
- [Watir](https://github.com/watir/watir), or [Capybara](https://github.com/teamcapybara/capybara).
- However, any Ruby based project should be able to use it.
+My latest project, [ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder), is a Ruby gem that allows you to record your desktop
+or a specific application window. The gem is primarily geared towards browser
+based automated tests using [Selenium](https://github.com/SeleniumHQ/selenium),
+[Watir](https://github.com/watir/watir), or [Capybara](https://github.com/teamcapybara/capybara).
+However, any Ruby based project should be able to use it.
  <!--more-->
 
 If you are familiar with [SauceLabs](https://saucelabs.com) or
 [BrowserStack](https://www.browserstack.com/), you may be
 aware of their video recording feature. In
 addition to providing screenshots and a log, these services provide an option
- to record the test execution which could be a painkiller while
-debugging those UI tests failures. You are able to see the test execution
-in action and see what happened before, during, and after the test failure
-or an application stack trace. This makes debugging and documenting test
-cases or application bugs (edge cases anyone?) less painful than they can be.
+to record the test execution which could help you easily debug
+those UI tests failures. You are able to see the test execution
+in action and see what happened before, during, and after a test failure
+or an application stack trace. This aids in debugging and documenting test
+cases or application bugs. Edge cases anyone?
 
 However, if you are not using these services and are interested in
-recording your test executions, check out the
-[ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder)
-gem. Here is a quick overview of the features:
+recording your test executions, check out my gem on
+[GitHub](https://github.com/kapoorlakshya/ffmpeg-screenrecorder). Here is a quick overview of the features:
 
 
 ## Record your desktop
@@ -66,7 +65,7 @@ opts      = { input:     'desktop',
 ## Record a specific window
 
 This mode records a specific application window with the given
-window title. This keeps the focus limited your application and
+window title. This keeps the focus limited to your application and
 keeps the recording size relatively smaller than the desktop mode,
 unless of course you maximize the window and record fullscreen.
 
@@ -100,8 +99,8 @@ expect(@browser.h2(text: 'News).present?).to be(true)
     </iframe>
 </div>
 
-<b>Note</b>: This feature is not supported on Linux due to a limitation in
-`x11grab`. However, you can set the `x` and `y` coordinates along with
+<b>Note</b>: This feature is not supported by `x11grab` on Linux. However,
+you can set the `x` and `y` coordinates along with
 the `video_size` to limit the recording region to the target window.
 See example [here](https://trac.ffmpeg.org/wiki/Capture/Desktop).
 
@@ -141,7 +140,7 @@ record system audio.
 <b>Discard recording</b>
 
 If your test execution passes, you can easily discard the recording
-through `@recorder.discard`.
+through `@recorder.discard` or `@recorder.delete`.
 
 <b>Live stream</b>
 

@@ -112,7 +112,7 @@ your `opts` Hash.
 ```ruby
 opts = { input:     'desktop',
          output:    'recorder-test.mp4',
-         framerate: 30,
+         framerate: 15,
          log:       'recorder.log',
          log_level: Logger::DEBUG, # For gem
          advanced: { loglevel: 'level+debug', # For FFmpeg

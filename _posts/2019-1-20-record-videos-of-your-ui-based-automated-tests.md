@@ -123,15 +123,21 @@ You can further configure FFmpeg through the `:advanced` key in
 your `opts` Hash.
 
 ```ruby
-opts = { input:     'desktop',
-         output:    'recorder-test.mp4',
-         framerate: 15,
-         log:       'recorder.log',
-         log_level: Logger::DEBUG, # For gem
-         advanced: { loglevel: 'level+debug', # For FFmpeg
-                     video_size:  '640x480',
-                     show_region: '1' }
-}
+opts      = { input:     'desktop',
+             output:    'recorder-test.mp4',
+             framerate: 15,
+             log:       'recorder.log',
+             log_level: Logger::DEBUG, # For gem
+             advanced: { loglevel: 'level+debug', # For FFmpeg
+                         video_size:  '640x480',
+                         show_region: '1' }
+ }
+
+#
+# Command to FFmpeg:
+#
+# ffmpeg -y -f gdigrab -r 15 -loglevel level+debug -video_size 640x480
+#   -show_region 1 -i desktop recorder-test.mp4 2> recorder.log
 ```
 
 ## Supports Windows, Linux, and macOS

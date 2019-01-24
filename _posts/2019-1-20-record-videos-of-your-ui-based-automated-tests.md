@@ -54,7 +54,20 @@ opts      = { input:     'desktop',
 # Run your test
 
 # Stops FFmpeg and writes video file
-@recorder.stop #=> #<FFMPEG::Movie...>
+@recorder.stop
+#=> #<FFMPEG::Movie:0x00000000067e0a08
+    @path="screenrecorder-desktop.mp4",
+    @container="mov,mp4,m4a,3gp,3g2,mj2",
+    @duration=5.0,
+    @time=0.0,
+    @creation_time=nil,
+    @bitrate=1051,
+    @rotation=nil,
+    @video_stream="h264 (High 4:4:4 Predictive) (avc1 / 0x31637661), yuv444p, 2560x1440, 1048 kb/s, 15 fps, 15 tbr, 15360 tbn, 30 tbc (default)",
+    @audio_stream=nil,
+    @video_codec="h264 (High 4:4:4 Predictive) (avc1 / 0x31637661)", @colorspace="yuv444p",
+    @video_bitrate=1048,
+    @resolution="2560x1440">
 ```
 
 <div class="video-responsive">

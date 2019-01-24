@@ -140,10 +140,16 @@ opts      = { input:     'desktop',
 #   -show_region 1 -i desktop recorder-test.mp4 2> recorder.log
 ```
 
+## Discard recording if test passes
+
+If your test execution passes, you can easily discard the recording
+through `@recorder.discard` or `@recorder.delete`.
+
 ## Supports Windows, Linux, and macOS
 
-macOS support coming soon. Need to dust off my wife's 2010 MacBook
-Pro and finalize the code :)
+Microsoft Windows and Linux is supported as of `beta5`. macOS support
+coming soon - need to dust off my wife's 2010 MacBook Pro and finalize
+the code :)
 
 ## Planned features
 
@@ -155,11 +161,6 @@ Transcode video to GIF, MKV, or whatever your reporting tool supports.
 
 Use DirectShow (Windows), ALSA (Linux) or avfoundation (macOS) to
 record system audio.
-
-<b>Discard recording</b>
-
-If your test execution passes, you can easily discard the recording
-through `@recorder.discard` or `@recorder.delete`.
 
 <b>Live stream</b>
 

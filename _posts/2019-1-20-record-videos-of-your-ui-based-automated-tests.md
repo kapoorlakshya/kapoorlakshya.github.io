@@ -32,7 +32,7 @@ to record the test execution which could help you easily debug
 those UI tests failures. You are able to see the test execution
 in action and see what happened before, during, and after a test failure
 or an application stack trace. This aids in debugging and documenting test
-cases or application bugs. Edge cases anyone?
+cases or application bugs.
 
 However, if you are not using these services and are interested in
 recording your test executions, check out my gem on

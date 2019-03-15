@@ -2,7 +2,7 @@
 layout: post
 title: Record videos of your UI based automated tests
 date: 2019-1-20
-permalink: /introducing-ffmpeg-screenrecorder
+permalink: /introducing-screen-recorder-ruby-gem
 categories:
     - ruby
     - gems
@@ -17,7 +17,8 @@ tags:
     - capybara
 ---
 
-My latest project, [ffmpeg-screenrecorder](https://github.com/kapoorlakshya/ffmpeg-screenrecorder), is a Ruby gem that allows you to record your desktop
+My latest project, [screen-recorder](https://github.com/kapoorlakshya/screen-recorder), 
+is a Ruby gem that allows you to record your desktop
 or a specific application window. The gem is primarily geared towards browser
 based automated tests using [Selenium](https://github.com/SeleniumHQ/selenium),
 [Watir](https://github.com/watir/watir), or [Capybara](https://github.com/teamcapybara/capybara).
@@ -36,7 +37,7 @@ cases or application bugs.
 
 However, if you are not using these services and are interested in
 recording your test executions, check out my gem on
-[GitHub](https://github.com/kapoorlakshya/ffmpeg-screenrecorder). Here is a quick overview of the features:
+[GitHub](https://github.com/kapoorlakshya/screen-recorder). Here is a quick overview of the features:
 
 
 ## Record your desktop
@@ -45,29 +46,12 @@ This mode records the whole screen and is best suited if your tests launch
 multiple windows or if they resize the browser/GUI during the execution.
 
 ```ruby
-opts      = { input:     'desktop',
-              output:    'screenrecorder-desktop.mp4',
-              framerate: 15 }
-@recorder = FFMPEG::ScreenRecorder.new(opts)
+@recorder = ScreenRecorder::Desktop.new(output: 'recording.mp4')
 @recorder.start
 
-# Run your test
+# Run tests or whatever you want to record
 
-# Stops FFmpeg and writes video file
 @recorder.stop
-#=> #<FFMPEG::Movie:0x00000000067e0a08
-    @path="screenrecorder-desktop.mp4",
-    @container="mov,mp4,m4a,3gp,3g2,mj2",
-    @duration=5.0,
-    @time=0.0,
-    @creation_time=nil,
-    @bitrate=1051,
-    @rotation=nil,
-    @video_stream="h264 (High 4:4:4 Predictive) (avc1 / 0x31637661), yuv444p, 2560x1440, 1048 kb/s, 15 fps, 15 tbr, 15360 tbn, 30 tbc (default)",
-    @audio_stream=nil,
-    @video_codec="h264 (High 4:4:4 Predictive) (avc1 / 0x31637661)", @colorspace="yuv444p",
-    @video_bitrate=1048,
-    @resolution="2560x1440">
 ```
 
 <div class="video-responsive">
@@ -85,26 +69,14 @@ unless of course you maximize the window and record fullscreen.
 ```ruby
 require 'watir'
 
-browser = Watir::Browser.new :firefox
-
-# FFMPEG::WindowTitles.fetch('firefox') # Provide name of exe
-#=> ["Mozilla Firefox"]
-
-opts      = { input:     FFMPEG::WindowTitles.fetch('firefox').first,
-              output:    'screenrecorder-firefox.mp4',
-              framerate: 15 }
-@recorder = FFMPEG::ScreenRecorder.new(opts)
+browser   = Watir::Browser.new :firefox
+@recorder = ScreenRecorder::Window.new(title: 'Mozilla Firefox', output: 'recording.mp4')
 @recorder.start
 
-# Run tests
-browser.goto 'watir.com'
-browser.link(text: 'News').wait_until_present.click
-
-# Using rspec-expectations gem
-expect(@browser.h2(text: 'News).present?).to be(true)
+# Run tests or whatever you want to record
 
 @recorder.stop
-@browser.quit
+browser.quit 
 ```
 
 <div class="video-responsive">
@@ -112,38 +84,79 @@ expect(@browser.h2(text: 'News).present?).to be(true)
     </iframe>
 </div>
 
+<b>Fetch Window Title</b>
+
+A helper method is available to fetch the title of the active window
+for the given process name.
+
+```ruby
+ScreenRecorder::Titles.fetch('firefox') # Name of exe
+#=> ["Mozilla Firefox"]
+```
+
 <b>Note</b>: This feature is not supported by `x11grab` on Linux. However,
 you can set the `x` and `y` coordinates along with
 the `video_size` to limit the recording region to the target window.
 See example [here](https://trac.ffmpeg.org/wiki/Capture/Desktop).
 
-## Advanced Usage
-
-You can further configure FFmpeg through the `:advanced` key in
-your `opts` Hash.
+## Output
 
 ```ruby
-opts      = { input:     'desktop',
-             output:    'recorder-test.mp4',
-             framerate: 15,
-             log:       'recorder.log',
-             log_level: Logger::DEBUG, # For gem
-             advanced: { loglevel: 'level+debug', # For FFmpeg
-                         video_size:  '640x480',
-                         show_region: '1' }
- }
-
-#
-# Command to FFmpeg:
-#
-# ffmpeg -y -f gdigrab -r 15 -loglevel level+debug -video_size 640x480
-#   -show_region 1 -i desktop recorder-test.mp4 2> recorder.log
+@recorder.video
+#=> #<FFMPEG::Movie:0x00000000067e0a08
+    @path="recording.mp4",
+    @container="mov,mp4,m4a,3gp,3g2,mj2",
+    @duration=5.0,
+    @time=0.0,
+    @creation_time=nil,
+    @bitrate=1051,
+    @rotation=nil,
+    @video_stream="h264 (High 4:4:4 Predictive) (avc1 / 0x31637661), yuv444p, 2560x1440, 1048 kb/s, 15 fps, 15 tbr, 15360 tbn, 30 tbc (default)",
+    @audio_stream=nil,
+    @video_codec="h264 (High 4:4:4 Predictive) (avc1 / 0x31637661)", @colorspace="yuv444p",
+    @video_bitrate=1048,
+    @resolution="2560x1440">
 ```
-
-## Discard recording if test passes
 
 If your test execution passes, you can easily discard the recording
 through `@recorder.discard` or `@recorder.delete`.
+
+## Advanced Options
+
+You can provide additional parameters to *ffmpeg* using the `advanced` 
+parameter. This feature is yet to be fully tested, so please feel free 
+to report any bugs or request a feature.
+
+```ruby
+  advanced = { framerate: 30,
+               log:       'recorder.log',
+               loglevel:  'level+debug', # For FFmpeg
+               video_size:  '640x480',
+               show_region: '1' }
+  ScreenRecorder::Desktop.new(output:   'recording.mp4',
+                              advanced: advanced)
+```
+
+This will be parsed as:
+
+```bash
+ffmpeg -y -f gdigrab -framerate 30 -loglevel level+debug -video_size 640x480 -show_region 1 -i desktop recording.mp4 2> recorder.log
+```
+
+## Logging
+
+You can also configure the logging level of the gem:
+
+```ruby
+ScreenRecorder.logger.level = Logger::DEBUG
+```
+
+## Use with Cucumber
+
+A Cucumber + Watir based example is available 
+[here](https://github.com/kapoorlakshya/cucumber-watir-test-recorder-example).
+
+
 
 ## Supports Windows, Linux, and macOS
 
@@ -168,6 +181,9 @@ For purposes outside of automated testing, this could be a very basic
 live streaming option if you operate your own RTMP server. See the
 possibilities [here](https://trac.ffmpeg.org/wiki/StreamingGuide).
 
+Other planned features and bugs can be found on the [Issues](https://github.com/kapoorlakshya/screen-recorder/issues)
+ page.
+
 ## Demo
 
 There is a [Cucumber](https://github.com/cucumber/cucumber) +
@@ -179,4 +195,4 @@ There is a [Cucumber](https://github.com/cucumber/cucumber) +
 This project is my attempt to give back to the open source
 community. It is still in the early stages of development, so please
 feel free to report any bugs or request a feature through the
-[Issues page](https://github.com/kapoorlakshya/ffmpeg-screenrecorder/issues) on GitHub.
+[Issues page](https://github.com/kapoorlakshya/screen-recorder/issues) on GitHub.

@@ -184,12 +184,6 @@ possibilities [here](https://trac.ffmpeg.org/wiki/StreamingGuide).
 Other planned features and bugs can be found on the [Issues](https://github.com/kapoorlakshya/screen-recorder/issues)
  page.
 
-## Demo
-
-There is a [Cucumber](https://github.com/cucumber/cucumber) +
-[Watir](https://github.com/watir/watir) based demo available at
-[kapoorlakshya/cucumber-watir-test-recorder-example](https://github.com/kapoorlakshya/cucumber-watir-test-recorder-example).
-
 ## Please note
 
 This project is my attempt to give back to the open source

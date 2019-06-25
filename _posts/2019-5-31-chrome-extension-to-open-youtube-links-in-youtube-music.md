@@ -1,6 +1,6 @@
 ---
 layout: post
-title: I created an extension to open YouTube links in YouTube Music
+title: I created a browser extension to open YouTube links in YouTube Music
 date: 2019-5-31
 permalink: /chrome-extension-to-open-youtube-links-in-youtube-music
 categories:
@@ -30,6 +30,8 @@ I can't use Spotify either as it doesn't always get the latest songs or
 albums as fast as YouTube does.
 
 **Solution**: Create a Chrome extension to redirect YouTube links to YouTube Music.
+
+**Update** (06/06/2019): The extension supports Chrome, Firefox, and Edge as of v0.2.0.
 <!--more-->
 
 To solve this problem, I looked into creating a Chrome extension. The first
@@ -46,12 +48,11 @@ extension for Chrome and Chromium based browsers.
 
 ### Installation
 
-1. Clone the [`youtube2music`](https://github.com/kapoorlakshya/youtube2music) repository to your Desktop or wherever you want.
-2. Launch Chrome and navigate to `chrome://extensions`.
-3. Enable **Developer mode** in the top right.
-4. Click on **Load unpacked…** on the left and select the cloned repository (folder) from step 1. 
+Chrome - [https://chrome.google.com/webstore/detail/youtube-to-youtube-music/cjcafjnfjeldocjljhejfemlgfogbcjk](https://chrome.google.com/webstore/detail/youtube-to-youtube-music/cjcafjnfjeldocjljhejfemlgfogbcjk)
 
-You should now see the extension in the list.
+Firefox - [https://addons.mozilla.org/en-US/firefox/addon/youtube-to-youtube-music/](https://addons.mozilla.org/en-US/firefox/addon/youtube-to-youtube-music/)
+
+Edge - See the [official guide](https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/adding-and-removing-extensions) for instructions. Microsoft Store link coming soon.
 
 ### Usage
 

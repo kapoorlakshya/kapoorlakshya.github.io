@@ -4,18 +4,34 @@ title: Open Source Contributions
 permalink: /contributions/
 ---
 
-#### Watir (Web Application Testing in Ruby) gem
+### screen-recorder (Author)
+
+A Ruby gem to video record your computer screen - desktop or specific window. 
+Primarily geared towards recording automated UI test executions for debugging 
+and documentation. [View on GitHub](https://github.com/kapoorlakshya/screen-recorder).
+
+### Webdrivers gem (Co-maintainer)
+
+Run Selenium tests more easily with automatic installation and updates 
+for all supported webdrivers. **Now bundled with Ruby on Rails 6!** [View on GitHub](https://github.com/titusfortner/webdrivers).
+
+### Watir
+
+An open source Ruby library for automating tests. Watir interacts with a 
+browser the same way people do: clicking links, filling out forms and 
+validating text.
+
+My pull requests:
+
 * [Element#right_click now accepts modifiers.](https://github.com/watir/watir/pull/861)
 * [Add Watir::Element#attribute_values and #attribute_list which return 
 attributes from an element.](https://github.com/watir/watir/pull/775)
 * [Rescue from Selenium::WebDriver::Error::NoSuchAlertError.](https://github.com/watir/watir/pull/680)
 
-#### Webdrivers gem
-* [Chromedriver#latest_version now returns latest binary version 
-corresponding to the installed Chrome version. ](https://github.com/titusfortner/webdrivers/pull/32)
-* [MSWebdriver now fetches the binary corresponding to the currently 
-installed Edge version instead of the latest one.](https://github.com/titusfortner/webdrivers/pull/15)
-* [MSWebdrivers now uses Edge version to download the correct binary 
-version.](https://github.com/titusfortner/webdrivers/pull/13)
-* [MicrosoftWebDriver - Implement version checking and download of 
-latest binary.](https://github.com/titusfortner/webdrivers/pull/11)
+### heroku/heroku-buildpack-google-chrome
+* [GOOGLE_CHROME_SHIM now responds to --version and --product-version](https://github.com/heroku/heroku-buildpack-google-chrome/pull/73)
+
+### youtube2music (Author)
+
+Browser extension to open YouTube links in YouTube Music. Works on Chrome,
+Firefox, and Edge. [View on GitHub](https://github.com/kapoorlakshya/youtube2music).

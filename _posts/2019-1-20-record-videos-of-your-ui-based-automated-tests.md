@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Record videos of your UI based automated tests
+title: Record videos of your UI based (Selenium) automated tests
 date: 2019-1-20
 permalink: /introducing-screen-recorder-ruby-gem
 categories:
@@ -16,6 +16,7 @@ tags:
     - capybara
     - automated-testing
     - test-recorder
+    - video-record-selenium-tests
 ---
 
 My latest project, [screen-recorder](https://github.com/kapoorlakshya/screen-recorder), 
@@ -92,10 +93,10 @@ A helper method is available to fetch the title of the active window
 for the given process name.
 
 ```ruby
-ScreenRecorder::Titles.fetch('firefox') # Name of exe
+ScreenRecorder::Window.fetch_title('firefox') # Name of exe
 #=> ["Mozilla Firefox"]
 
-ScreenRecorder::Titles.fetch('chrome')
+ScreenRecorder::Window.fetch_title('chrome')
 #=> ["New Tab - Google Chrome"]
 ```
 

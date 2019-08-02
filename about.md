@@ -4,10 +4,12 @@ title: About
 permalink: /about/
 ---
 
-I am a graduate of California State University, Chico with a degree in
-Computer Information Systems and a minor in Business Administration.
-I have a background in Quality Assurance and Software Development.
+My name is Lakshya, and the easiest way to pronounce my name is to say 
+"luck" with a "sh" sound at the end - "Luck-sh". The "ya" is silent and 
+comes from the phonetic spelling of the Hindi word लक्ष्य (ल = La, क्ष्य = ksh, य = ya), 
+which means your aim or goal in life.
 
+I am originally from New Delhi area and currently live in Chico, California. 
 I love learning about how things work, and how to break and fix them. 
 In my free time I enjoy developing open source tools and working on 
 projects that make software development and testing easier. You can find 

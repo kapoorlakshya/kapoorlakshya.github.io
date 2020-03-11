@@ -14,36 +14,38 @@ tags:
   - device farm
 ---
 
-AWS Device Farm recently [announced](https://aws.amazon.com/about-aws/whats-new/2020/01/aws-device-farm-announces-desktop-browser-testing-using-selenium/)
-support for desktop browser testing using Selenium on January 14, 2020. The desktop browser service appears to be 
-very basic [[1](https://docs.aws.amazon.com/devicefarm/latest/testgrid/techref.html#techref-limitations)]
-[[2](https://docs.aws.amazon.com/devicefarm/latest/testgrid/techref-support.html)] when compared to [SauceLabs](https://saucelabs.com/)
-or [CrossBrowserTesting](https://saucelabs.com/), the other two services that I have been evaluating as part of my role
-at [Wambi](https://wambi.org/).
+AWS Device Farm recently 
+[announced](https://aws.amazon.com/about-aws/whats-new/2020/01/aws-device-farm-announces-desktop-browser-testing-using-selenium/)
+support for desktop browser testing using Selenium starting January 14, 2020. The desktop browser service appears to be 
+[very basic](https://docs.aws.amazon.com/devicefarm/latest/testgrid/techref-support.html) and has
+[limitations](https://docs.aws.amazon.com/devicefarm/latest/testgrid/techref.html#techref-limitations) when
+compared to [SauceLabs](https://saucelabs.com/) or [CrossBrowserTesting](https://saucelabs.com/), the other two 
+services that I have been evaluating as part of my new role at [Wambi](https://wambi.org/).
 
 Since the desktop browser service is fairly new, there is no [service](https://webdriver.io/docs/customservices.html) 
 available for it in WebdriverIO. So to make it work, you have to use the `aws-sdk` to generate the remote hub URL and then
-use a custom test runner ([launcher](https://webdriver.io/docs/clioptions.html#run-the-test-runner-programmatically))
+use a custom test runner or a [launcher](https://webdriver.io/docs/clioptions.html#run-the-test-runner-programmatically)
 to use it. As part of my journey to learn Node.js, I have figured it all out and documented it in this post.
 
 I am hoping to create a `wdio-device-farm-service` soon, but for now the following works well :).
 
  <!--more-->
+ 
+ > Note: This guide assumes WebdriverIO v5 ([instructions](https://webdriver.io/docs/gettingstarted.html)) is already setup with tests ready 
+ > to be executed.
+
+Also, if you find any mistakes or think something can be improved, please feel free to email me. I appreciate
+constructive criticism. Okay! Let's do this!
 
 ### Steps
 
-1. Create a Device Farm project
-2. Generate a WebDriver (remote) Hub URL
-3. Configure WebdriverIO for remote execution
-4. Create Grunt task
-5. Execute your tests
+1. [Create a Device Farm project](#step-1)
+2. [Generate a WebDriver (remote) Hub URL](#step-2)
+3. [Configure WebdriverIO for remote execution](#step-3)
+4. [Execute tests](#step-4)
+5. [Create Grunt task (optional)](#step-5)
 
-> Note: This guide assumes WebdriverIO v5 ([instructions](https://webdriver.io/docs/gettingstarted.html)) is already setup with tests ready 
-> to be executed.
-
-Okay! Let's do this!
-
-## 1. Create a Device Farm project
+## 1. <a name="step-1"><a/>Create a Device Farm project
 
 The first thing we need to do is create a new desktop browser project on Device Farm. This project is where our tests 
 will be executed and tracked. When we're done creating the project, we want to take note of the 
@@ -62,7 +64,7 @@ Once the project is created, you'll see a unique **Project Arn**:
 
 Copy this ARN and store it in a new environment variable of your choice. I am using `AWS_DF_ARN` for this demo.
 
-## 2. Generate a WebDriver (remote) Hub URL
+## 2. <a name="step-2"><a/>Generate a WebDriver (remote) Hub URL
 
 In this step, we want to use the `aws-sdk` to create a WebDriver Hub URL using the Project ARN for your project. The 
 Device Farm API calls this the test grid URL and has the handy `createTestGridUrl()` function to generate it.
@@ -139,11 +141,19 @@ module.exports = { getTestGridInfo }
 Let's store this function in a file called `aws-test-grid-helper.js` under the `utils` directory: 
 `./utils/aws-test-grid-helper.js`. We will `require` this in our custom test runner in the next step.
 
-## 3. Configure WebdriverIO
+## 3. <a name="step-3"><a/>Configure WebdriverIO
 
 In this step, we'll create a custom test runner or a launcher to programmatically launch our tests as opposed to 
 using the `wdio` command. The launcher will live in a file called `aws-launcher.js` inside the `config` directory or 
 wherever your WebdriverIO config file lives.
+
+Before we create the launcher, we need to install the `@wdio/cli` package if it's not already installed:
+
+```bash
+npm i --save-dev @wdio/cli
+```
+
+Then add the following in `config/aws-launcher.js`:
 
 ```js
 const Launcher = require('@wdio/cli').default
@@ -173,7 +183,7 @@ const { getTestGridInfo } = require('../utils/aws-test-grid-helper');
 Notice this line here: `const wdio = new Launcher("config/aws-device-farm.conf.js", testGridInfo)`
 
 The `config/aws-device-farm.conf.js` points to the configuration file for our test suite. If you're not sure what this
-is, read the [Testrunner Configuration](https://webdriver.io/docs/configurationfile.html) documentation on the 
+is, read the [Configuration](https://webdriver.io/docs/configurationfile.html) documentation on the 
 WebdriverIO website. 
 
 And `testGridInfo` is the object (key-value pair) that the `getTestGridInfo(awsParams)` function 
@@ -186,11 +196,43 @@ port:443
 protocol:"https"
 ```
 
-When we instantiate the `Launcher`, it will merge the remote Hub information with the configuration from the 
-`aws-device-farm.conf.js` file and launch our tests on the Device Farm. This is same as setting the `hostname` and the
-rest of the parameters directly in the config file. You can read more on this 
+When we instantiate the `Launcher`, it will merge the remote Hub information (`testGridInfo`) with the configuration from the 
+`aws-device-farm.conf.js` file and then launch our tests on the Device Farm. This is same as setting the `hostname` and the
+rest of the parameters directly in the config file. You can read more about this 
 [here](https://webdriver.io/docs/clioptions.html#run-the-test-runner-programmatically).
 
-## 4. Create Grunt task
+## 4. <a name="step-4"><a/>Execute tests
 
-#### 5. Execute tests
+Once you have the launcher, the helper, and the WebDriverIO configuration in place, you can simply execute your tests
+via the launcher:
+
+```bash
+node config/aws-launcher.js
+```
+You can add this as a `npm run` script in your `package.json` or create a Grunt task in the next step.
+
+## 5. <a name="step-5"><a/>Create Grunt task (optional)
+
+If you are already using Grunt and want to create a task for this `launcher`, simply add the following to your 
+`Gruntfile`:
+
+```js
+module.exports = function (grunt) {
+  // AWS Device Farm uses a WDIO Launcher to programatically
+  // launch the tests instead of using the wdio command.
+  grunt.registerTask('webdriver:aws', function () {
+    let done = this.async()
+    grunt.util.spawn({
+      cmd: process.execPath,
+      args: ['config/aws-launcher.js'],
+      opts: { stdio: 'inherit' }
+    }, done)
+  })
+
+  grunt.loadNpmTasks('grunt-mocha')
+  grunt.loadNpmTasks('grunt-webdriver')
+  grunt.registerTask('default', ['webdriver:local'])
+}
+```
+
+That's it!

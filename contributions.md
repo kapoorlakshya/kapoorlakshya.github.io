@@ -27,7 +27,7 @@ My pull requests:
 * [Add Watir::Element#attribute_values and #attribute_list which return 
 attributes from an element.](https://github.com/watir/watir/pull/775)
 * [Rescue from Selenium::WebDriver::Error::NoSuchAlertError.](https://github.com/watir/watir/pull/680)
-* [Fix failing unit ests] (https://github.com/watir/watir/pull/875)
+* [Fix failing unit tests](https://github.com/watir/watir/pull/875)
 
 ### heroku/heroku-buildpack-google-chrome
 * [GOOGLE_CHROME_SHIM now responds to --version and --product-version](https://github.com/heroku/heroku-buildpack-google-chrome/pull/73)

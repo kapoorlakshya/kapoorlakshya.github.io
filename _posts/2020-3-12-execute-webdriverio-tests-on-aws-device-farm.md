@@ -32,14 +32,14 @@ available for it in WebdriverIO. So to make it work, you have to use the `aws-sd
 use a custom test runner or a [launcher](https://webdriver.io/docs/clioptions.html#run-the-test-runner-programmatically)
 to use it. The launcher is required because, based on my understanding, the current implementation of the `wdio` test
 runner expects a top-level `config` object and this object does not allow us to integrate the async `aws-sdk` calls 
-inside it. The calls have been made through the launcher and then passed down to the final `config`.
+inside it. The calls have to be made through the launcher and then passed down to the final `config`.
 
 As part of my journey to learn Node.js, I have figured it all out and documented it in this post. I am hoping to 
 create a `wdio-device-farm-service` soon, but for now the following works well :).
 
  <!--more-->
  
- > Notes: 
+ > Note: 
 >
 > 1. This guide assumes WebdriverIO v5 ([instructions](https://webdriver.io/docs/gettingstarted.html)) is already setup with tests ready 
 > to be executed.

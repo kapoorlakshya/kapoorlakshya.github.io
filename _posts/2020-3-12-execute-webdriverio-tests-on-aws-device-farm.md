@@ -300,3 +300,7 @@ module.exports = function(grunt) {
 ```
 
 That's it!
+
+#### Credits
+
+Thanks to [these awesome Redditors](https://old.reddit.com/r/learnjavascript/comments/femn9k/new_to_js_and_cant_wrap_my_head_around_callbacks/) for helping me figure this out.

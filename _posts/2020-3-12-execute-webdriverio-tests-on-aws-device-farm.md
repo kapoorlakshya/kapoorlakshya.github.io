@@ -180,7 +180,7 @@ const getTestGridInfo = require("../utils/aws-test-grid-helper");
     projectArn: process.env.AWS_DF_ARN,
     expiresInSeconds: 300 // 5 Minutes
   };
-  let testGridInfo = await getTestGridInfo(awsParams);
+  const testGridInfo = await getTestGridInfo(awsParams);
   const wdio = new Launcher("config/aws-device-farm.conf.js", testGridInfo);
 
   wdio.run().then(
@@ -211,8 +211,8 @@ protocol: "https";
 ```
 
 Now, when the `Launcher` is instantiated, it will merge the remote Hub information (`testGridInfo`) with the configuration from the
-`aws-device-farm.conf.js` file and then launch our tests on the Device Farm. This is same as setting the `hostname` and the
-rest of the parameters directly in the config file. You can read more about this
+`aws-device-farm.conf.js` file and then launch our tests on the Device Farm. This is same as manually setting the `hostname`
+and the rest of the parameters directly in the config file. You can read more about this
 [here](https://webdriver.io/docs/clioptions.html#run-the-test-runner-programmatically).
 
 ## 4. <a name="step-4"><a/>Execute tests

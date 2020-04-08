@@ -1,8 +1,10 @@
 ---
 layout: post
-title: You can now execute WebdriverIO browser tests on AWS Device Farm
+title: Executing WebdriverIO browser tests on AWS Device Farm
 date: 2020-3-12
-permalink: /execute-webdriverio-browser-tests-aws-device-farm
+permalink: /executing-webdriverio-browser-tests-aws-device-farm
+redirect_from:
+  - /execute-webdriverio-browser-tests-aws-device-farm
 categories:
   - nodejs
   - webdriverio

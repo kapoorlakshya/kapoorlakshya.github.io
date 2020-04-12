@@ -197,7 +197,7 @@ const getTestGridInfo = require("../utils/aws-test-grid-helper");
 Notice this line here: `const wdio = new Launcher("config/aws-device-farm.conf.js", testGridInfo)`
 
 The `config/aws-device-farm.conf.js` points to the WebdriverIO configuration file for our test suite. If you're not sure what this
-is, I'd recommend reading the [Configuration](https://webdriver.io/docs/configurationfile.html) documentation. Here's an example
+is, I recommend reading the [Configuration](https://webdriver.io/docs/configurationfile.html) documentation. Here's an example
 config file you can use to get started:
 
 ```js
@@ -209,9 +209,11 @@ exports.config = {
     // 'path/to/excluded/files'
   ],
   maxInstances: 3,
+  // Supported capabilities
+  // https://docs.aws.amazon.com/devicefarm/latest/testgrid/techref-support.html
   capabilities: [
     {
-      browserName: localBrowserName,
+      browserName: "chrome",
       browserVersion: "latest",
       platform: "windows"
     }

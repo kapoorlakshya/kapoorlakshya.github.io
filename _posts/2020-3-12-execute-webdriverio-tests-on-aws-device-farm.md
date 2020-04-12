@@ -10,15 +10,12 @@ categories:
   - webdriverio
   - automated_testing
 tags:
+  - webdriverio aws device farm
   - nodejs
   - javascript
   - webdriverio
   - selenium
   - aws device farm
-  - aws device farm desktop browser
-  - webdriverio launcher
-  - webdriverio test runner
-  - wdio launcher
 ---
 
 AWS Device Farm recently

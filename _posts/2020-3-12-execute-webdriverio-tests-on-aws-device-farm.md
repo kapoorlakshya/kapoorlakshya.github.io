@@ -197,7 +197,38 @@ const getTestGridInfo = require("../utils/aws-test-grid-helper");
 Notice this line here: `const wdio = new Launcher("config/aws-device-farm.conf.js", testGridInfo)`
 
 The `config/aws-device-farm.conf.js` points to the WebdriverIO configuration file for our test suite. If you're not sure what this
-is, I'd recommend reading the [Configuration](https://webdriver.io/docs/configurationfile.html) documentation.
+is, I'd recommend reading the [Configuration](https://webdriver.io/docs/configurationfile.html) documentation. Here's an example
+config file you can use to get started:
+
+```js
+// conf/aws-device-farm.conf.js
+exports.config = {
+  runner: "local",
+  specs: ["./specs/**/*.js"],
+  exclude: [
+    // 'path/to/excluded/files'
+  ],
+  maxInstances: 3,
+  capabilities: [
+    {
+      browserName: localBrowserName,
+      browserVersion: "latest",
+      platform: "windows"
+    }
+  ],
+  sync: true,
+  deprecationWarnings: true,
+  logLevel: "error",
+  bail: 0,
+  baseUrl: "https://testingwambi.com", // @todo Set to wambi test site v is ENV var
+  waitforTimeout: 10000,
+  connectionRetryTimeout: defaultTimeoutInterval, // Default timeout in milliseconds for request
+  connectionRetryCount: 3
+  // Hooks and other configs go under here
+}
+```
+
+> Note: Make sure you don't have any services, like `chromedriver` or `selenium-standalone`, defined in this config.
 
 And `testGridInfo` is the object (key-value pair) that the `getTestGridInfo(awsParams)` function
 returns with the following information:

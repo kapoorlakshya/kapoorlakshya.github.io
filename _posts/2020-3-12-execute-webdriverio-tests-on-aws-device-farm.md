@@ -18,6 +18,10 @@ tags:
   - aws device farm
 ---
 
+**Update**: Working on a WebdriverIO service to make this easy - [wdio-aws-device-farm-service](https://github.com/kapoorlakshya/wdio-aws-device-farm-service)
+
+--
+
 AWS Device Farm recently
 [announced](https://aws.amazon.com/about-aws/whats-new/2020/01/aws-device-farm-announces-desktop-browser-testing-using-selenium/)
 support for desktop browser testing using Selenium starting January 14, 2020. The desktop browser service appears to be
